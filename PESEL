@@ -1,0 +1,60 @@
+import time 
+
+miesiace = {
+        1:"Styczeń",
+        2:"Luty",
+        3:"Marzec",
+        4:"Kwiecień",
+        5:"Maj",
+        6:"Czerwiec",
+        7:"Lipiec",
+        8:"Sierpień",
+        9:"Wrzesień",
+        10:"Październik",
+        11:"Listopad",
+        12:"Grudzień"
+}
+
+def skip():
+    print("\n")
+
+def plec(pesel):
+    if int(len(pesel)) < 11:
+        print("To nie jest pesel")
+        print("Podaj poprawną wartość!")
+    elif int(pesel[-2]) % 2 == 0:
+        print("Płeć: Kobieta")
+    else:
+        print("Płeć: Meżczyzna")
+
+def urodzenie(pesel):
+    dl = int(len(pesel))
+    dzien = str(pesel[4:6]) #dzień
+
+    #rok
+    if(dl == 11):
+        if int(pesel[0]) <= 1:
+            dekada = "20"
+            rok = "20" + str(pesel[:2])
+        elif int(pesel[0]) > 1:
+            dekada = "19"
+            rok = "19" + str(pesel[:2])
+    else:
+        print("To nie jest pesel!")
+        print("Podaj poprwana wartość!")
+    #miesiąc
+    if dekada == "20" and int(pesel[2:4]) in range(21,33):
+        miesiac = int(pesel[2:4]) - 20 
+    elif dekada == "19" and int(pesel[2:4]) in range(1,13):
+        miesiac = int(pesel[2:4])
+    else:
+        print("Błędny pesel")
+    #wypisanie wszystkiego
+    print("Rok: " + rok + "\nMiesiąc: " + miesiace[miesiac] + "\nDzień: "+dzien)
+
+print("Podaj swój pesel:")
+wartosc = input()
+plec(wartosc)
+urodzenie(wartosc)
+
+time.sleep(5)
